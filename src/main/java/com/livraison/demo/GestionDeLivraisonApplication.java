@@ -5,6 +5,10 @@ import com.livraison.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -25,6 +29,17 @@ public class GestionDeLivraisonApplication {
 				new User(3, "med", "pwd3", "user3@gmail.com")
 		).collect(Collectors.toList());
 		repository.saveAll(users);
+	}
+
+	@Bean
+	public WebMvcConfigurer corsConfigurer(){
+	return new WebMvcConfigurer() {
+		@Override
+		public void addCorsMappings(CorsRegistry registry) {
+			WebMvcConfigurer.super.addCorsMappings(registry);
+			registry.addMapping("/*").allowedHeaders("*").allowedOrigins("*").allowedMethods("*").allowCredentials(true);
+		}
+	};
 	}
 	public static void main(String[] args) {
 		SpringApplication.run(GestionDeLivraisonApplication.class, args);
