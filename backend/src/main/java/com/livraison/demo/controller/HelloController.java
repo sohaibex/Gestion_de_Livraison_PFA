@@ -23,18 +23,18 @@ public class HelloController {
         return "C est Bon, Hey !!";
     }
 
-    @PostMapping("/authentification")
+    @PostMapping("/login")
     public String generateToken(@RequestBody AuthRequest authRequest) throws Exception {
 
         try{
 
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword())
+                    new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
             );
 
         }catch (Exception ex){
             throw new Exception("Invalide User Name Or Password !");
         }
-        return jwUtil.generateToken(authRequest.getUserName());
+        return jwUtil.generateToken(authRequest.getUsername());
     }
 }
