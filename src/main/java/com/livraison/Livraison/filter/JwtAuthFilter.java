@@ -1,11 +1,9 @@
-package filter;
-
+package com.livraison.Livraison.filter;
 import com.livraison.Livraison.jwt.JwtTokenProvider;
 import com.livraison.Livraison.security.SecurityConstant;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

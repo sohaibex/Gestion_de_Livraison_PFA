@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider {
-    @Value("${jwt.secret}")
+    @Value("${jwt}")
     private String secret;
 
     //method that generates jwt token to pass requests
