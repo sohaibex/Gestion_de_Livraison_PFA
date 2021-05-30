@@ -9,17 +9,19 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.livraison.Livraison.security.SecurityConstant.*;
 import static java.util.Arrays.stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import com.auth0.jwt.JWT;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Component
 public class JwtTokenProvider {
     @Value("${jwt.secret}")
     private String secret;
@@ -52,6 +54,26 @@ public class JwtTokenProvider {
         String[] claims = getClaimsFromToken(token);
         return stream(claims).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
+
+
+    public boolean isTokenValid(String username,String token)
+    {
+JWTVerifier verifier=getJWTVerifier();
+return StringUtils.isNoneEmpty(username) && !isTokenExpired(verifier,token);
+
+    }
+
+    private boolean isTokenExpired(JWTVerifier verifier, String token) {
+        Date expiration = verifier.verify(token).getExpiresAt();
+        return  expiration.before(new Date());
+    }
+
+    public String getSubject(String token)
+    {
+        JWTVerifier verifier=getJWTVerifier();
+        return verifier.verify(token).getSubject();
+    }
+
 
     private String[] getClaimsFromToken(String token) {
         JWTVerifier verifier = getJWTVerifier();
