@@ -5,7 +5,7 @@ public class SecurityConstant {
     //Date d'expiration du token
     public static  final long EXIPRATION_TIME = 432_000_000; //5 days
     //Token header Barer token
-    public static final String Token_Header="Bearer";
+    public static final String TOKEN_PREFIX="Bearer";
     //the JWT TOKEN
     public static final String JWT_TOKEN_HEADER="Jwt-Token";
     //message d'erreur si le token ne peut pas etre verifier
