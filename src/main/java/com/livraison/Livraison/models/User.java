@@ -7,9 +7,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class User implements Serializable {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name ="dtype")
+public abstract class User implements Serializable {
 @Id
-@GeneratedValue(strategy = GenerationType.AUTO)
+@GeneratedValue(strategy = GenerationType.AUTO.IDENTITY)
 @Column(nullable = false,updatable = false)
     private Long id;
     private String userId;
