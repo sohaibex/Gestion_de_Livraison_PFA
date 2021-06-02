@@ -1,10 +1,10 @@
 package com.livraison.Livraison.models;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import java.util.Date;
+import javax.persistence.*;
+import java.io.Serializable;
+
 @Entity
 @DiscriminatorValue("Super_Admin")
-public class SuperAdmin extends User {
+public class SuperAdmin extends User implements Serializable  {
 
 }

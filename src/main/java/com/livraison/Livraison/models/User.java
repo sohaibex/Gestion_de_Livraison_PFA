@@ -1,17 +1,14 @@
 package com.livraison.Livraison.models;
-
-import org.aspectj.weaver.GeneratedReferenceTypeDelegate;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name ="dtype")
 public abstract class User implements Serializable {
 @Id
-@GeneratedValue(strategy = GenerationType.AUTO.IDENTITY)
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(nullable = false,updatable = false)
     private Long id;
     private String userId;
@@ -33,22 +30,6 @@ public abstract class User implements Serializable {
     public User() {
     }
 
-    public User(Long id, String userId, String nom, String prenom, String cin, String tel, String adresse, String email, String password, String username, String[] role, String[] authorities, Date lastLoginDate, Date lastLoginDateDisplay) {
-        this.id = id;
-        this.userId = userId;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.cin = cin;
-        this.tel = tel;
-        this.adresse = adresse;
-        this.email = email;
-        this.password = password;
-        this.username = username;
-        this.role = role;
-        this.authorities = authorities;
-        this.lastLoginDate = lastLoginDate;
-        this.lastLoginDateDisplay = lastLoginDateDisplay;
-    }
 
     public Long getId() {
         return id;
