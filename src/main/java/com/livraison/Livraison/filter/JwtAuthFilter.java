@@ -3,6 +3,7 @@ import com.livraison.Livraison.jwt.JwtTokenProvider;
 import com.livraison.Livraison.security.SecurityConstant;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -27,9 +28,15 @@ else
         filterChain.doFilter(request,response);
         return;
     }
+
+    String token = authorizationHeader.substring(SecurityConstant.TOKEN_PREFIX.length());
+    String username = jwtTokenProvider.getSubject(token);
+    filterChain.doFilter(request,response);
 }
 
     }
+
+
 
 
 }
