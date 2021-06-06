@@ -7,6 +7,5 @@ import java.util.Optional;
 
 public interface SuperAdminRepo extends JpaRepository<SuperAdmin,Long> {
     void deleteSuperAdminById(Long id);
-
     Optional<SuperAdmin> getSuperAdminById(Long id);
 }
