@@ -3,7 +3,6 @@ package com.livraison.Livraison.jwt;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.livraison.Livraison.models.UserPrincipal;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.livraison.Livraison.security.SecurityConstant.*;

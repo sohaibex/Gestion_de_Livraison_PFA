@@ -1,30 +1,22 @@
 package com.livraison.Livraison.services;
 
-
-import com.livraison.Livraison.exception.*;
 import com.livraison.Livraison.models.User;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-import java.io.IOException;
 import java.util.List;
 
-public interface UserService {
+public interface UserService  {
 
-    User register(String firstName, String lastName, String username, String email) throws UserNotFoundException, UsernameExistException, EmailExistException, MessagingException;
+    User createUser(User user);
 
-    List<User> getUsers();
+    User getUser(String email);
 
-    User findUserByUsername(String username);
+    User getUserByUserId(String userId);
 
-    User findUserByEmail(String email);
+    User updateUser(String id, User User);
 
-    User addNewUser(String firstName, String lastName, String username, String email, String role, boolean isNonLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, UsernameExistException, EmailExistException, IOException, NotAnImageFileException;
+    void deleteUser(String userId);
 
-    User updateUser(String currentUsername, String newFirstName, String newLastName, String newUsername, String newEmail, String role, boolean isNonLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, UsernameExistException, EmailExistException, IOException, NotAnImageFileException;
+    List<User> getUsers(int page, int limit, String search, int status);
 
-    void deleteUser(String username) throws IOException;
-
-    void resetPassword(String email) throws MessagingException, EmailNotFoundException;
-
-    User updateProfileImage(String username, MultipartFile profileImage) throws UserNotFoundException, UsernameExistException, EmailExistException, IOException, NotAnImageFileException;
 }

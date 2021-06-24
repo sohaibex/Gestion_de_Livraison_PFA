@@ -1,6 +1,5 @@
 package com.livraison.Livraison.services;
 
-import com.livraison.Livraison.exception.UserNotFoundException;
 import com.livraison.Livraison.models.SuperAdmin;
 import com.livraison.Livraison.repository.SuperAdminRepo;
 import org.springframework.beans.factory.annotation.Autowired;
