@@ -1,9 +1,9 @@
 package com.livraison.Livraison.services;
 
+import com.livraison.Livraison.exception.UserNotFoundException;
 import com.livraison.Livraison.models.SuperAdmin;
 import com.livraison.Livraison.repository.SuperAdminRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,8 +36,7 @@ public class SuperAdminService {
         return superadminRepo.findAll();
     }
 
-    public SuperAdmin getSuperAdminById(long id)
-    {
+    public SuperAdmin getSuperAdminById(long id) throws UserNotFoundException {
         return superadminRepo.getSuperAdminById(id).orElseThrow(() -> new UserNotFoundException("User by id"+id+"was not found"));
     }
 

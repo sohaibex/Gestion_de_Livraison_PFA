@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
 public class AppExceptionHandler {
-
+/*
     @ExceptionHandler(value={ExecutionControl.UserException.class})
     public ResponseEntity<Object> HandleUserException(UserException ex, WebRequest request)
     {
@@ -39,5 +39,5 @@ public class AppExceptionHandler {
                 errors.put(error.getField(), error.getDefaultMessage()));
 
         return new ResponseEntity<>(errors, new HttpHeaders(), HttpStatus.BAD_REQUEST);
-    }
+    }*/
 }

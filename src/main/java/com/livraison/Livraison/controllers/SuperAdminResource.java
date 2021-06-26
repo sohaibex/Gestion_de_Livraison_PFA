@@ -1,5 +1,6 @@
 package com.livraison.Livraison.controllers;
 
+import com.livraison.Livraison.exception.UserNotFoundException;
 import com.livraison.Livraison.models.SuperAdmin;
 import com.livraison.Livraison.services.SuperAdminService;
 import net.bytebuddy.implementation.bind.annotation.Super;
@@ -26,8 +27,7 @@ public class SuperAdminResource {
     }
 
     @GetMapping("/getSuperAdmin/{id}")
-    public ResponseEntity<SuperAdmin> getAllSuperAdminsById(@PathVariable("id") Long id)
-    {
+    public ResponseEntity<SuperAdmin> getAllSuperAdminsById(@PathVariable("id") Long id) throws UserNotFoundException {
         SuperAdmin superadmin = superAdminService.getSuperAdminById(id);
         return new ResponseEntity<>(superadmin, HttpStatus.OK);
     }

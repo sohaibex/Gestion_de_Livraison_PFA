@@ -1,5 +1,7 @@
 package com.livraison.Livraison.models;
 
+import com.livraison.Livraison.entities.UserEntity;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,6 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @DiscriminatorValue("Livreur")
-public class Livreur extends User implements Serializable {
+public class Livreur extends UserEntity implements Serializable {
+
 
 }

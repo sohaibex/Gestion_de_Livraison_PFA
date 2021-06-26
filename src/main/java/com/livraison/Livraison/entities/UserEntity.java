@@ -1,10 +1,16 @@
-package com.livraison.Livraison.models;
+package com.livraison.Livraison.entities;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-
-public class User implements Serializable {
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name ="dtype")
+public class UserEntity implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false,updatable = false)
     private Long id;
     private String userId;
     private String nom ;
@@ -16,14 +22,6 @@ public class User implements Serializable {
     private String password;
     private String username;
     private String[] role;
-    private String[] authorities;
-    private Date lastLoginDate;
-    private Date lastLoginDateDisplay;
-
-
-
-    public User() {
-    }
 
 
     public Long getId() {
@@ -114,27 +112,5 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public String[] getAuthorities() {
-        return authorities;
-    }
 
-    public void setAuthorities(String[] authorities) {
-        this.authorities = authorities;
-    }
-
-    public Date getLastLoginDate() {
-        return lastLoginDate;
-    }
-
-    public void setLastLoginDate(Date lastLoginDate) {
-        this.lastLoginDate = lastLoginDate;
-    }
-
-    public Date getLastLoginDateDisplay() {
-        return lastLoginDateDisplay;
-    }
-
-    public void setLastLoginDateDisplay(Date lastLoginDateDisplay) {
-        this.lastLoginDateDisplay = lastLoginDateDisplay;
-    }
 }
