@@ -10,8 +10,8 @@ import java.util.Date;
 public class UserEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false,updatable = false)
     private Long id;
+    @Column(nullable = false)
     private String userId;
     private String nom ;
     private String prenom;
@@ -19,9 +19,19 @@ public class UserEntity implements Serializable {
     private String tel;
     private String adresse;
     private String email;
-    private String password;
+    @Column(nullable=false)
+    private String encryptedPassword;
     private String username;
-    private String[] role;
+
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
+    }
+
+    private String role;
 
 
     public Long getId() {
@@ -88,14 +98,6 @@ public class UserEntity implements Serializable {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -104,11 +106,11 @@ public class UserEntity implements Serializable {
         this.username = username;
     }
 
-    public String[] getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(String[] role) {
+    public void setRole(String role) {
         this.role = role;
     }
 

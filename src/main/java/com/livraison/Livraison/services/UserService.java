@@ -1,7 +1,7 @@
 package com.livraison.Livraison.services;
 
 import com.livraison.Livraison.models.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
+
 
 import java.util.List;
 

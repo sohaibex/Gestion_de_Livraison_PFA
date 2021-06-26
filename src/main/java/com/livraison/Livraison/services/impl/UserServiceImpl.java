@@ -16,14 +16,18 @@ public class UserServiceImpl implements UserService {
 //injection de dependance
     @Autowired
    UserRepo userRepo;
+
     @Override
     //implementation de la methode create user
     public User createUser(User user) {
 
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(user,userEntity);
+        userEntity.setEncryptedPassword("password test");
+        userEntity.setUserId("user id test");
 //la persistance
       UserEntity newUser= userRepo.save(userEntity);
+
       User userDto= new User();
       BeanUtils.copyProperties(newUser,userDto);
         return userDto;

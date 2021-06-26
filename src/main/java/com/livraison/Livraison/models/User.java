@@ -14,8 +14,9 @@ public class User implements Serializable {
     private String adresse;
     private String email;
     private String password;
+    private String encryptedPassword;
     private String username;
-    private String[] role;
+    private String role;
 
 
 
@@ -104,12 +105,19 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public String[] getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(String[] role) {
+    public void setRole(String role) {
         this.role = role;
+    }
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
     }
 
 

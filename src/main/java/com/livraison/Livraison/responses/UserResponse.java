@@ -72,16 +72,16 @@ public class UserResponse {
         this.username = username;
     }
 
-    public String[] getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(String[] role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
     private String adresse;
     private String email;
     private String username;
-    private String[] role;
+    private String role;
 }

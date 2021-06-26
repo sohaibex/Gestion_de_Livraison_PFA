@@ -9,7 +9,7 @@ public class UserRequest {
     private String email;
     private String password;
     private String username;
-    private String[] role;
+    private String role;
 
     public String getNom() {
         return nom;
@@ -75,11 +75,11 @@ public class UserRequest {
         this.username = username;
     }
 
-    public String[] getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(String[] role) {
+    public void setRole(String role) {
         this.role = role;
     }
 }

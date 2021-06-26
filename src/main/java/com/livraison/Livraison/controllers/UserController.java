@@ -26,6 +26,7 @@ public class UserController {
     @PostMapping
     public UserResponse createUser(@RequestBody UserRequest userRequest)
     {
+        //user dto
         User user = new User();
         BeanUtils.copyProperties(userRequest,user);
 
