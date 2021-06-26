@@ -1,17 +1,11 @@
 package com.livraison.Livraison.services;
 
-import com.livraison.Livraison.exception.UserNotFoundException;
-import com.livraison.Livraison.models.SuperAdmin;
-import com.livraison.Livraison.repository.SuperAdminRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class SuperAdminService {
 
+/*
         private final SuperAdminRepo superadminRepo;
 
     @Autowired
@@ -36,7 +30,8 @@ public class SuperAdminService {
         return superadminRepo.findAll();
     }
 
-    public SuperAdmin getSuperAdminById(long id) throws UserNotFoundException {
+    public SuperAdmin getSuperAdminById(long id)
+    {
         return superadminRepo.getSuperAdminById(id).orElseThrow(() -> new UserNotFoundException("User by id"+id+"was not found"));
     }
 
@@ -45,6 +40,7 @@ public class SuperAdminService {
         superadminRepo.deleteSuperAdminById(id);
     }
 
+*/
 
 
 }

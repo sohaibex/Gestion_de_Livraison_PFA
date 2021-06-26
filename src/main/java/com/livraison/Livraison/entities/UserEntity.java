@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity
+@Entity(name="users")
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name ="dtype")
 public class UserEntity implements Serializable {

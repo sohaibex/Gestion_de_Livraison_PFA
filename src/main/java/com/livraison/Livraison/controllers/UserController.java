@@ -1,6 +1,5 @@
 package com.livraison.Livraison.controllers;
 
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.livraison.Livraison.models.User;
 import com.livraison.Livraison.requests.UserRequest;
 import com.livraison.Livraison.responses.UserResponse;

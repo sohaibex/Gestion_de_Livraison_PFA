@@ -16,9 +16,7 @@ public class User implements Serializable {
     private String password;
     private String username;
     private String[] role;
-    private String[] authorities;
-    private Date lastLoginDate;
-    private Date lastLoginDateDisplay;
+
 
 
 
@@ -114,27 +112,5 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public String[] getAuthorities() {
-        return authorities;
-    }
 
-    public void setAuthorities(String[] authorities) {
-        this.authorities = authorities;
-    }
-
-    public Date getLastLoginDate() {
-        return lastLoginDate;
-    }
-
-    public void setLastLoginDate(Date lastLoginDate) {
-        this.lastLoginDate = lastLoginDate;
-    }
-
-    public Date getLastLoginDateDisplay() {
-        return lastLoginDateDisplay;
-    }
-
-    public void setLastLoginDateDisplay(Date lastLoginDateDisplay) {
-        this.lastLoginDateDisplay = lastLoginDateDisplay;
-    }
 }
