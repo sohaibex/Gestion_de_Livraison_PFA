@@ -18,19 +18,10 @@ public class UserEntity implements Serializable {
     private String cin;
     private String tel;
     private String adresse;
+    @Column(nullable=false,length = 120,unique = true)
     private String email;
     @Column(nullable=false)
     private String encryptedPassword;
-    private String username;
-
-    public String getEncryptedPassword() {
-        return encryptedPassword;
-    }
-
-    public void setEncryptedPassword(String encryptedPassword) {
-        this.encryptedPassword = encryptedPassword;
-    }
-
     private String role;
 
 
@@ -98,14 +89,6 @@ public class UserEntity implements Serializable {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getRole() {
         return role;
     }
@@ -113,6 +96,15 @@ public class UserEntity implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
+    }
+
 
 
 }

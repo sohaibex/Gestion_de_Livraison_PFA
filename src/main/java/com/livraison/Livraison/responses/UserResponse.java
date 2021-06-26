@@ -7,6 +7,9 @@ public class UserResponse {
     private String prenom;
     private String cin;
     private String tel;
+    private String adresse;
+    private String email;
+    private String role;
 
     public String getUserId() {
         return userId;
@@ -64,14 +67,6 @@ public class UserResponse {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getRole() {
         return role;
     }
@@ -80,8 +75,5 @@ public class UserResponse {
         this.role = role;
     }
 
-    private String adresse;
-    private String email;
-    private String username;
-    private String role;
+
 }
