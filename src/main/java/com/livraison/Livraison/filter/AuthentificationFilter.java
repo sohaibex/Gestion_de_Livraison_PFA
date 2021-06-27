@@ -73,9 +73,7 @@ public class AuthentificationFilter extends UsernamePasswordAuthenticationFilter
 
         res.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
         res.addHeader("user_id", userDto.getUserId());
-        res.addHeader("role", userDto.getRole());
-
-        res.getWriter().write("{\"token\": \"" + token + "\", \"User_id\": \"" + userDto.getUserId() + "\",\"Role\":\""+userDto.getRole()+"\"}");
+        res.getWriter().write("{\"token\": \"" + token + "\", \"User_id\": \"" + userDto.getUserId() + "\"}");
 
     }
 

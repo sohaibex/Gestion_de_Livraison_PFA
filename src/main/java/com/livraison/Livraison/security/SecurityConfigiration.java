@@ -48,7 +48,7 @@ public class SecurityConfigiration extends WebSecurityConfigurerAdapter {
 
     protected AuthentificationFilter getAuthenticationFilter() throws Exception {
         final AuthentificationFilter filter = new AuthentificationFilter(authenticationManager());
-        filter.setFilterProcessesUrl("/users/login");
+        filter.setFilterProcessesUrl("/api/login");
         return filter;
     }
 

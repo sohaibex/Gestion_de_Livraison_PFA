@@ -6,6 +6,7 @@ import com.livraison.Livraison.responses.UserResponse;
 import com.livraison.Livraison.services.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,10 +16,10 @@ public class UserController {
     @Autowired
     UserService userService ;
 
-    @GetMapping
-    public String getUser()
+    @GetMapping(path="/{id}")
+    public String getUser(@PathVariable String UserId)
     {
-        return "get user";
+        return "the user id is "+UserId;
     }
 
 
@@ -45,11 +46,12 @@ public class UserController {
     {
         return "Update User";
     }
+/*
+    @DeleteMapping(path="/{id}")
+    public ResponseEntity<Object> deleteUser(@PathVariable String id) {
 
-    @DeleteMapping
-    public String deleteUser()
-    {
-        return "delete User";
-    }
+        userService.deleteUser(id);
 
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }*/
 }
