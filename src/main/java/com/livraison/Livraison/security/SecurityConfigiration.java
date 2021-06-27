@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
@@ -39,7 +40,10 @@ public class SecurityConfigiration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(getAuthenticationFilter())
-                .addFilter(new AuthentificationFilter( authenticationManager()));
+                .addFilter(new AuthentificationFilter( authenticationManager()))
+                .sessionManagement()
+                //stateless ce depend du token pcq on est dans un microservice
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     protected AuthentificationFilter getAuthenticationFilter() throws Exception {
