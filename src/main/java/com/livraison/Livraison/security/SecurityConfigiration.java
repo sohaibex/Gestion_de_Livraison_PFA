@@ -1,6 +1,7 @@
 package com.livraison.Livraison.security;
 
 
+import com.livraison.Livraison.filter.AuthentificationFilter;
 import com.livraison.Livraison.services.UserService;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,7 +16,8 @@ public class SecurityConfigiration extends WebSecurityConfigurerAdapter {
 
     private final UserService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-//initialisation des attributs avec le contructeur
+
+    //initialisation des attributs avec le contructeur
     public SecurityConfigiration(UserService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userDetailsService = userDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -24,17 +26,26 @@ public class SecurityConfigiration extends WebSecurityConfigurerAdapter {
     //Configuration du spring securite
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      http
-              //activation du cors qui permet de communiquer avec plusiers systemes
-              .cors().and()
-              //desactivation du crf parce qu'on a pas un formulaire
-              .csrf().disable()
-            //autorisation seulement Post request de la route /users
-              .authorizeRequests()
-              .antMatchers((HttpMethod.POST),"/users")
-              .permitAll()
-              //tous les autres methodes doivent etre connecte
-              .anyRequest().authenticated();
+        http
+                //activation du cors qui permet de communiquer avec plusiers systemes
+                .cors().and()
+                //desactivation du crf parce qu'on a pas un formulaire
+                .csrf().disable()
+                //autorisation seulement Post request de la route /users
+                .authorizeRequests()
+                .antMatchers((HttpMethod.POST), SecurityConstants.SIGN_UP_URL)
+                .permitAll()
+                //tous les autres methodes doivent etre connecte
+                .anyRequest().authenticated()
+                .and()
+                .addFilter(getAuthenticationFilter())
+                .addFilter(new AuthentificationFilter( authenticationManager()));
+    }
+
+    protected AuthentificationFilter getAuthenticationFilter() throws Exception {
+        final AuthentificationFilter filter = new AuthentificationFilter(authenticationManager());
+        filter.setFilterProcessesUrl("/users/login");
+        return filter;
     }
 
     // configure adapter donne la possibilite de creer une instance de la personne authentifier

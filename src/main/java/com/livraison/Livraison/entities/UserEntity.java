@@ -2,7 +2,7 @@ package com.livraison.Livraison.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+
 
 @Entity(name="users")
 @Inheritance(strategy=InheritanceType.JOINED)

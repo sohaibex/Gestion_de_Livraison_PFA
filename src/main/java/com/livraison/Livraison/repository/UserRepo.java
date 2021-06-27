@@ -11,8 +11,5 @@ import org.springframework.stereotype.Repository;
 //heritage de la classe crud repository  qui contient tous les methode naisaissaire du crud
 @Repository
 public interface UserRepo  extends CrudRepository<UserEntity, Long> {
-
-
-     UserEntity findUserByUsername(String username);
      UserEntity findUserByEmail(String email);
 }

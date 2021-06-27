@@ -7,14 +7,11 @@ import com.livraison.Livraison.services.UserService;
 import com.livraison.Livraison.sheared.Utils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-
 import java.util.ArrayList;
-import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -48,46 +45,36 @@ if(checkUser != null) throw new RuntimeException("User already exist ");
 
     }
 
-    @Override
-    public User getUser(String email) {
-        return null;
-    }
 
-    @Override
-    public User getUserByUserId(String userId) {
-        return null;
-    }
-
-    @Override
-    public User updateUser(String id, User User) {
-        return null;
-    }
-
-    @Override
-    public void deleteUser(String userId) {
-
-    }
-
-    @Override
-    public List<User> getUsers(int page, int limit, String search, int status) {
-        return null;
-    }
-
-//la methode de la class UserDetailsService sert de recuperer l'utilisateur authentifier de la DB on utilisent le repo
+    //la methode de la class UserDetailsService sert de recuperer l'utilisateur authentifier de la DB on utilisent le repo
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-   UserEntity userEntity = userRepo.findUserByEmail(email);
 
-   //verification
+        UserEntity userEntity = userRepo.findUserByEmail(email);
+        //Verification
+        if(userEntity == null) throw new UsernameNotFoundException(email);
+
+        return new org.springframework.security.core.userdetails.User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
+    }
+
+
+    @Override
+    public User getUser(String email) {
+        UserEntity userEntity = userRepo.findUserByEmail(email);
+
+        //verification
         if(userEntity==null)
         {
             throw  new UsernameNotFoundException(email);
         }
         else
         {
-            return new org.springframework.security.core.userdetails.User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
+             User user = new User();
+             BeanUtils.copyProperties(userEntity,user);
+            return user;
         }
-
-
     }
+
+
+
 }
