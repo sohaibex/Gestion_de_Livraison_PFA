@@ -23,7 +23,15 @@ public class UserEntity implements Serializable {
     @Column(nullable=false)
     private String encryptedPassword;
     private String role;
+    private String password;
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Long getId() {
         return id;
