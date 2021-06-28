@@ -1,4 +1,4 @@
-package com.livraison.Livraison.models;
+package com.livraison.Livraison.entities;
 
 import com.livraison.Livraison.entities.UserEntity;
 

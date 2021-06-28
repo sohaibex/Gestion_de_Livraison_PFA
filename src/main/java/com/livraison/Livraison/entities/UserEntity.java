@@ -25,6 +25,9 @@ public class UserEntity implements Serializable {
     private String role;
 
 
+
+
+
     public Long getId() {
         return id;
     }
