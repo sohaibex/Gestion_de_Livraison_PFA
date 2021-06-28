@@ -9,7 +9,7 @@ public class SecurityConstants {
     //header string authorization
     public static final String HEADER_STRING = "Authorization";
     //sign up url les routes que je veux les autorises
-    public static final String SIGN_UP_URL = "/users";
+    public static final String SIGN_UP_URL = "/SuperAdmin";
     //token key secret
     public static final String TOKEN_SECRET = "dfg893hdc475zwerop4tghg4ddfdfgdsdfeqaas?=-0ljznm0-9";
 }

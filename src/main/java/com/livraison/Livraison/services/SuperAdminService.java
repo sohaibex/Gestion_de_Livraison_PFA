@@ -1,46 +1,25 @@
 package com.livraison.Livraison.services;
 
-import org.springframework.stereotype.Service;
+import com.livraison.Livraison.entities.SuperAdminEntity;
+import com.livraison.Livraison.models.SuperAdmin;
+import com.livraison.Livraison.models.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-@Service
-public class SuperAdminService {
+import java.util.List;
 
-/*
-        private final SuperAdminRepo superadminRepo;
+public interface SuperAdminService  extends UserDetailsService {
+    SuperAdminEntity createSuperAdmin(SuperAdminEntity superAdmin);
 
-    @Autowired
-    public SuperAdminService(SuperAdminRepo superadminRepo) {
-        this.superadminRepo = superadminRepo;
-    }
+    SuperAdminEntity getSuperAdmin(String email);
 
+    SuperAdminEntity getSuperAdminById(String superAdminId);
 
-    public SuperAdmin addSuperAdmin(SuperAdmin superadmin)
-    {
-        superadmin.setUserId(UUID.randomUUID().toString());
-        return superadminRepo.save(superadmin);
-    }
+    SuperAdminEntity updateSuperAdmin(String id, SuperAdminEntity superAdminDto);
 
-    public SuperAdmin updateSuperAdmin(SuperAdmin superadmin)
-    {
-        return superadminRepo.save(superadmin);
-    }
+    void deletegetSuperAdmin(String userId);
 
-    public List<SuperAdmin> getAllSuperAdmin()
-    {
-        return superadminRepo.findAll();
-    }
+    List<User> getSuperAdmin(int page, int limit, String search, int status);
 
-    public SuperAdmin getSuperAdminById(long id)
-    {
-        return superadminRepo.getSuperAdminById(id).orElseThrow(() -> new UserNotFoundException("User by id"+id+"was not found"));
-    }
-
-    public void deleteSuperAdmin(Long id)
-    {
-        superadminRepo.deleteSuperAdminById(id);
-    }
-
-*/
 
 
 }

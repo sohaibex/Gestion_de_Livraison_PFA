@@ -1,7 +1,7 @@
 package com.livraison.Livraison.controllers;
 
-import com.livraison.Livraison.entities.ResponsableAgence;
-import com.livraison.Livraison.services.ResponsableAgentService;
+import com.livraison.Livraison.models.ResponsableAgence;
+import com.livraison.Livraison.services.impl.ResponsableAgentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
