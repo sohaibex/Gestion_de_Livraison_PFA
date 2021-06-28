@@ -1,6 +1,6 @@
 package com.livraison.Livraison.services.impl;
 
-import com.livraison.Livraison.entities.ResponsableAgence;
+import com.livraison.Livraison.models.ResponsableAgence;
 import com.livraison.Livraison.repository.ResponsableAgentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

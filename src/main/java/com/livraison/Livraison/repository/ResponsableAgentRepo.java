@@ -1,6 +1,6 @@
 package com.livraison.Livraison.repository;
 
-import com.livraison.Livraison.entities.ResponsableAgence;
+import com.livraison.Livraison.models.ResponsableAgence;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
