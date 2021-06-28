@@ -7,9 +7,14 @@ import com.livraison.Livraison.services.UserService;
 import com.livraison.Livraison.sheared.Utils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,11 +115,17 @@ if(checkUser != null) throw new RuntimeException("User already exist ");
         return user;
     }
 
-
     @Override
     public void deleteUser(String userId) {
 
+        UserEntity userEntity = userRepo.findUserByUserId(userId);
+
+        if(userEntity == null) throw new UsernameNotFoundException(userId);
+
+        userRepo.delete(userEntity);
+
     }
+
 
     @Override
     public List<User> getUsers(int page, int limit, String search, int status) {
