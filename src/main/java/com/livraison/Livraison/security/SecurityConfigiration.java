@@ -2,6 +2,7 @@ package com.livraison.Livraison.security;
 
 
 import com.livraison.Livraison.filter.AuthentificationFilter;
+import com.livraison.Livraison.filter.AuthorizationFilter;
 import com.livraison.Livraison.services.UserService;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -40,7 +41,7 @@ public class SecurityConfigiration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(getAuthenticationFilter())
-                .addFilter(new AuthentificationFilter( authenticationManager()))
+                .addFilter(new AuthorizationFilter(authenticationManager()))
                 .sessionManagement()
                 //stateless ce depend du token pcq on est dans un microservice
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -48,7 +49,7 @@ public class SecurityConfigiration extends WebSecurityConfigurerAdapter {
 
     protected AuthentificationFilter getAuthenticationFilter() throws Exception {
         final AuthentificationFilter filter = new AuthentificationFilter(authenticationManager());
-        filter.setFilterProcessesUrl("/api/login");
+        filter.setFilterProcessesUrl("/users/login");
         return filter;
     }
 
@@ -57,6 +58,7 @@ public class SecurityConfigiration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
+
 
 
 }

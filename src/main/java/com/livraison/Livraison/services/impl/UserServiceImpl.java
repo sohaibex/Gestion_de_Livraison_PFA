@@ -75,6 +75,20 @@ if(checkUser != null) throw new RuntimeException("User already exist ");
         }
     }
 
+    @Override
+    public User getUserById(String userId) {
+        UserEntity userEntity = userRepo.findUserByUserId(userId);
+        if(userEntity==null)
+        {
+            throw  new UsernameNotFoundException(userId);
+        }
+        else
+        {
+            User userDto = new User();
+            BeanUtils.copyProperties(userEntity,userDto);
+            return userDto;
+        }
+    }
 
 
 }
