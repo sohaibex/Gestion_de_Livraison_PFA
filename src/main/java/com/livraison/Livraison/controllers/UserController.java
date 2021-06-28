@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
@@ -18,17 +20,17 @@ public class UserController {
     UserService userService ;
 
     @GetMapping(path="/{id}")
-    public UserResponse getUser(@PathVariable String id)
+    public ResponseEntity<UserResponse>getUser(@PathVariable String id)
     {
         User userDto= userService.getUserById(id);
         UserResponse userResponse = new UserResponse();
         BeanUtils.copyProperties(userDto,userResponse);
-        return userResponse;
+        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
     }
 
 
     @PostMapping
-    public UserResponse createUser(@RequestBody UserRequest userRequest)
+    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest)
     {
         //user dto
         User user = new User();
@@ -40,13 +42,13 @@ public class UserController {
 
        BeanUtils.copyProperties(createUser,userResponse);
 
-       return userResponse;
+        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.CREATED);
 
     }
 
 
     @PutMapping(path="/{id}")
-    public UserResponse updateUser(@PathVariable String id,@RequestBody UserRequest userRequest)
+    public ResponseEntity<UserResponse> updateUser(@PathVariable String id,@RequestBody UserRequest userRequest)
     {
         //user dto
         User userDto = new User();
@@ -58,10 +60,10 @@ public class UserController {
 
         BeanUtils.copyProperties(updateUser,userResponse);
 
-        return userResponse;
+        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.ACCEPTED);
     }
 
-    
+
     @DeleteMapping(path="/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable String id) {
 
