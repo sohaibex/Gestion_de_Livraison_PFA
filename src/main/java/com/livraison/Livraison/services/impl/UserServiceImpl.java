@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -88,6 +89,36 @@ if(checkUser != null) throw new RuntimeException("User already exist ");
             BeanUtils.copyProperties(userEntity,userDto);
             return userDto;
         }
+    }
+
+    @Override
+    public User updateUser(String userId, User userDto) {
+
+        UserEntity userEntity = userRepo.findUserByUserId(userId);
+
+        if(userEntity == null) throw new UsernameNotFoundException(userId);
+
+        userEntity.setNom(userDto.getNom());
+        userEntity.setPrenom(userDto.getPrenom());
+
+        UserEntity userUpdated = userRepo.save(userEntity);
+
+        User user = new User();
+
+        BeanUtils.copyProperties(userUpdated, user);
+
+        return user;
+    }
+
+
+    @Override
+    public void deleteUser(String userId) {
+
+    }
+
+    @Override
+    public List<User> getUsers(int page, int limit, String search, int status) {
+        return null;
     }
 
 

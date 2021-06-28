@@ -44,10 +44,20 @@ public class UserController {
     }
 
 
-    @PutMapping
-    public String updateUser()
+    @PutMapping(path="/{id}")
+    public UserResponse updateUser(@PathVariable String id,@RequestBody UserRequest userRequest)
     {
-        return "Update User";
+        //user dto
+        User userDto = new User();
+        BeanUtils.copyProperties(userRequest,userDto);
+
+        User updateUser= userService.updateUser(id,userDto);
+
+        UserResponse userResponse = new UserResponse();
+
+        BeanUtils.copyProperties(updateUser,userResponse);
+
+        return userResponse;
     }
 /*
     @DeleteMapping(path="/{id}")
