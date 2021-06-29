@@ -2,8 +2,10 @@ package com.livraison.Livraison.services.impl;
 
 import com.livraison.Livraison.models.ResponsableAgence;
 import com.livraison.Livraison.repository.ResponsableAgentRepo;
+import com.livraison.Livraison.sheared.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,11 @@ import java.util.UUID;
 public class ResponsableAgentService {
 
     private ResponsableAgentRepo responsableAgentRepo;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    Utils util;
 
     @Autowired
     public ResponsableAgentService(ResponsableAgentRepo responsableAgentRepo){
@@ -22,6 +29,7 @@ public class ResponsableAgentService {
     public ResponsableAgence addResponsableAgence(ResponsableAgence responsableAgence)
     {
         responsableAgence.setUserId(UUID.randomUUID().toString());
+        responsableAgence.setEncryptedPassword(bCryptPasswordEncoder.encode(responsableAgence.getPassword()));
         return responsableAgentRepo.save(responsableAgence);
     }
 
