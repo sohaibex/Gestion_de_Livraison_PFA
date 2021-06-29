@@ -1,6 +1,7 @@
 package com.livraison.Livraison.controllers;
 
 import com.livraison.Livraison.entities.SuperAdminEntity;
+import com.livraison.Livraison.models.User;
 import com.livraison.Livraison.requests.UserRequest;
 import com.livraison.Livraison.responses.UserResponse;
 import com.livraison.Livraison.services.SuperAdminService;
@@ -17,6 +18,14 @@ public class SuperAdminResource {
     @Autowired
     SuperAdminService superAdminService ;
 
+    @GetMapping(path="/{id}")
+    public ResponseEntity<UserResponse>getSuperAdminById(@PathVariable String id)
+    {
+        SuperAdminEntity superAdminDto= superAdminService.getSuperAdminById(id);
+        UserResponse userResponse = new UserResponse();
+        BeanUtils.copyProperties(superAdminDto,userResponse);
+        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
+    }
 
 
     @PostMapping
