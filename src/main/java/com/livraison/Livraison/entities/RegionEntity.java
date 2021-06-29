@@ -3,7 +3,7 @@ package com.livraison.Livraison.entities;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity(name = "region")
+@Entity(name = "regions")
 public class RegionEntity {
 
     @Id

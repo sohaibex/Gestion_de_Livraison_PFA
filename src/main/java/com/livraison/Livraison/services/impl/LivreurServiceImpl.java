@@ -50,12 +50,36 @@ public class LivreurServiceImpl implements LivreurService {
 
     @Override
     public LivreurEntity getLivreur(String email) {
-        return null;
+        LivreurEntity livreurEntity = livreurRepo.findLivreurByEmail(email);
+
+        //verification
+        if(livreurEntity==null)
+        {
+            throw  new UsernameNotFoundException(email);
+        }
+        else
+        {
+            LivreurEntity livreurDto = new LivreurEntity();
+            BeanUtils.copyProperties(livreurEntity,livreurDto);
+            return livreurDto;
+        }
     }
 
     @Override
     public LivreurEntity getLivreurById(String superAdminId) {
-        return null;
+        LivreurEntity livreurEntity = livreurRepo.findUserByUserId(superAdminId);
+
+        //verification
+        if(livreurEntity==null)
+        {
+            throw  new UsernameNotFoundException(superAdminId);
+        }
+        else
+        {
+            LivreurEntity livreurDto = new LivreurEntity();
+            BeanUtils.copyProperties(livreurEntity,livreurDto);
+            return livreurDto;
+        }
     }
 
     @Override

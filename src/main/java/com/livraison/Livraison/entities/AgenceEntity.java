@@ -3,7 +3,7 @@ package com.livraison.Livraison.entities;
 
 import javax.persistence.*;
 
-@Entity(name="agence")
+@Entity(name="agences")
 public class AgenceEntity {
 
     @Id
