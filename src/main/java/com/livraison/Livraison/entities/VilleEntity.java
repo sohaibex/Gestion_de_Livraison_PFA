@@ -2,8 +2,11 @@ package com.livraison.Livraison.entities;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
-@Entity(name="villes")
+@Entity(name="ville")
 public class VilleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,15 +19,10 @@ public class VilleEntity {
     @JoinColumn(name="id_region", nullable=false)
     private RegionEntity region;
 
+    @OneToMany(mappedBy = "ville")
+    private Set<AgenceEntity> agence;
 
-    public VilleEntity() {
-
-    }
-
-    public VilleEntity(Long id, String nomVille) {
-        this.id = id;
-        this.nomVille = nomVille;
-    }
+    public VilleEntity() {}
 
 
 
@@ -44,11 +42,4 @@ public class VilleEntity {
         this.nomVille = nomVille;
     }
 
-    @Override
-    public String toString() {
-        return "VilleEntity{" +
-                "id=" + id +
-                ", nomVille='" + nomVille + '\'' +
-                '}';
-    }
 }

@@ -51,11 +51,4 @@ public class RegionEntity {
         this.ville = ville;
     }
 
-    @Override
-    public String toString() {
-        return "VilleEntity{" +
-                "id=" + id +
-                ", nomRegion='" + nomRegion + '\'' +
-                '}';
-    }
 }
