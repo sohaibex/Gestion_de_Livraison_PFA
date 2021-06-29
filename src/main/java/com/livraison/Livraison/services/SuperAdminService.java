@@ -13,7 +13,7 @@ public interface SuperAdminService  extends UserDetailsService {
 
     SuperAdminEntity getSuperAdminById(String superAdminId);
 
-    SuperAdminEntity updateSuperAdmin(String id, SuperAdminEntity superAdminDto);
+    SuperAdminEntity updateSuperAdmin(String superAdminId, SuperAdminEntity superAdminDto);
 
     void deletegetSuperAdmin(String userId);
 

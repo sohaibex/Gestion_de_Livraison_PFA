@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface SuperAdminRepo extends CrudRepository<SuperAdminEntity, Long> {
 
-        SuperAdminEntity findSuperAdminEntitiesByEmail(String email);
-        SuperAdminEntity findSuperAdminEntityById(String id);
+        SuperAdminEntity findSuperAdminByEmail(String email);
+        SuperAdminEntity findUserByUserId(String superAdminId);
 
         }

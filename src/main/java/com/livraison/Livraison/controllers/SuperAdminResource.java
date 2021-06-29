@@ -39,7 +39,7 @@ public class SuperAdminResource {
 
 
     @PutMapping(path="/{id}")
-    public ResponseEntity<UserResponse> updateUser(@PathVariable String id,@RequestBody UserRequest userRequest)
+    public ResponseEntity<UserResponse> updateSuperAdmin(@PathVariable String id,@RequestBody UserRequest userRequest)
     {
         //user dto
         SuperAdminEntity superAdminDto = new SuperAdminEntity();
@@ -56,7 +56,7 @@ public class SuperAdminResource {
 
 
     @DeleteMapping(path="/{id}")
-    public ResponseEntity<Object> deleteUser(@PathVariable String id) {
+    public ResponseEntity<Object> deleteSuperAdmin(@PathVariable String id) {
 
         superAdminService.deletegetSuperAdmin(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -29,7 +29,7 @@ public class SuperAdminServiceImpl implements SuperAdminService {
 
     @Override
     public SuperAdminEntity createSuperAdmin(SuperAdminEntity superAdmin) {
-        SuperAdminEntity checkSuperAdmin= superAdminRepo.findSuperAdminEntitiesByEmail(superAdmin.getEmail());
+        SuperAdminEntity checkSuperAdmin= superAdminRepo.findSuperAdminByEmail(superAdmin.getEmail());
         if(checkSuperAdmin != null) throw new RuntimeException("User already exist ");
         SuperAdminEntity superAdminEntity = new SuperAdminEntity();
         BeanUtils.copyProperties(superAdmin,superAdminEntity);
@@ -43,7 +43,7 @@ public class SuperAdminServiceImpl implements SuperAdminService {
 
     @Override
     public SuperAdminEntity getSuperAdmin(String email) {
-        SuperAdminEntity superAdminEntity = superAdminRepo.findSuperAdminEntitiesByEmail(email);
+        SuperAdminEntity superAdminEntity = superAdminRepo.findSuperAdminByEmail(email);
 
         //verification
         if(superAdminEntity==null)
@@ -60,7 +60,7 @@ public class SuperAdminServiceImpl implements SuperAdminService {
 
     @Override
     public SuperAdminEntity getSuperAdminById(String superAdminId) {
-        SuperAdminEntity superAdminEntity = superAdminRepo.findSuperAdminEntitiesByEmail(superAdminId);
+        SuperAdminEntity superAdminEntity = superAdminRepo.findSuperAdminByEmail(superAdminId);
         if(superAdminEntity==null)
         {
             throw  new UsernameNotFoundException(superAdminId);
@@ -74,10 +74,10 @@ public class SuperAdminServiceImpl implements SuperAdminService {
     }
 
     @Override
-    public SuperAdminEntity updateSuperAdmin(String id, SuperAdminEntity superAdmin) {
-        SuperAdminEntity superAdminEntity = superAdminRepo.findSuperAdminEntityById(id);
+    public SuperAdminEntity updateSuperAdmin(String superAdminId, SuperAdminEntity superAdmin) {
+        SuperAdminEntity superAdminEntity = superAdminRepo.findUserByUserId(superAdminId);
 
-        if(superAdminEntity == null) throw new UsernameNotFoundException(id);
+        if(superAdminEntity == null) throw new UsernameNotFoundException(superAdminId);
 
         superAdminEntity.setNom(superAdmin.getNom());
         superAdminEntity.setPrenom(superAdmin.getPrenom());
@@ -93,7 +93,7 @@ public class SuperAdminServiceImpl implements SuperAdminService {
 
     @Override
     public void deletegetSuperAdmin(String superAdminId) {
-        SuperAdminEntity superAdminEntity = superAdminRepo.findSuperAdminEntityById(superAdminId);
+        SuperAdminEntity superAdminEntity = superAdminRepo.findUserByUserId(superAdminId);
 
         if(superAdminEntity == null) throw new UsernameNotFoundException(superAdminId);
 
@@ -108,7 +108,7 @@ public class SuperAdminServiceImpl implements SuperAdminService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        SuperAdminEntity superAdminEntity = superAdminRepo.findSuperAdminEntitiesByEmail(email);
+        SuperAdminEntity superAdminEntity = superAdminRepo.findSuperAdminByEmail(email);
         //Verification
         if(superAdminEntity == null) throw new UsernameNotFoundException(email);
 
