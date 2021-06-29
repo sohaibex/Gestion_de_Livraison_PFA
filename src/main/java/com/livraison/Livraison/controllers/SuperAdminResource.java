@@ -1,14 +1,9 @@
 package com.livraison.Livraison.controllers;
 
 import com.livraison.Livraison.entities.SuperAdminEntity;
-import com.livraison.Livraison.models.SuperAdmin;
-import com.livraison.Livraison.models.User;
-import com.livraison.Livraison.repository.SuperAdminRepo;
 import com.livraison.Livraison.requests.UserRequest;
 import com.livraison.Livraison.responses.UserResponse;
 import com.livraison.Livraison.services.SuperAdminService;
-import com.livraison.Livraison.services.UserService;
-import com.livraison.Livraison.services.impl.SuperAdminServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

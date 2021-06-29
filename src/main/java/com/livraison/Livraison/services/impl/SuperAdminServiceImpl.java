@@ -1,11 +1,8 @@
 package com.livraison.Livraison.services.impl;
 
 import com.livraison.Livraison.entities.SuperAdminEntity;
-import com.livraison.Livraison.entities.UserEntity;
-import com.livraison.Livraison.models.SuperAdmin;
 import com.livraison.Livraison.models.User;
 import com.livraison.Livraison.repository.SuperAdminRepo;
-import com.livraison.Livraison.repository.UserRepo;
 import com.livraison.Livraison.services.SuperAdminService;
 import com.livraison.Livraison.sheared.Utils;
 

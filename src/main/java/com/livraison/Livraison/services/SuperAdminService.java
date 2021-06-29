@@ -1,7 +1,6 @@
 package com.livraison.Livraison.services;
 
 import com.livraison.Livraison.entities.SuperAdminEntity;
-import com.livraison.Livraison.models.SuperAdmin;
 import com.livraison.Livraison.models.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 

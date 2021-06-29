@@ -1,4 +1,4 @@
-package com.livraison.Livraison.models;
+package com.livraison.Livraison.entities;
 
 import com.livraison.Livraison.entities.UserEntity;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @DiscriminatorValue("Livreur")
-public class Livreur extends UserEntity implements Serializable {
+public class LivreurEntity extends UserEntity implements Serializable {
 
 
 }
