@@ -42,7 +42,7 @@ public class SuperAdminServiceImpl implements SuperAdminService {
     }
 
     @Override
-    public SuperAdminEntity getSuperAdmin(String email) {
+    public SuperAdminEntity getSuperAdmin (String email) {
         SuperAdminEntity superAdminEntity = superAdminRepo.findSuperAdminByEmail(email);
 
         //verification
@@ -92,7 +92,7 @@ public class SuperAdminServiceImpl implements SuperAdminService {
     }
 
     @Override
-    public void deletegetSuperAdmin(String superAdminId) {
+    public void deleteSuperAdmin(String superAdminId) {
         SuperAdminEntity superAdminEntity = superAdminRepo.findUserByUserId(superAdminId);
 
         if(superAdminEntity == null) throw new UsernameNotFoundException(superAdminId);
@@ -101,7 +101,7 @@ public class SuperAdminServiceImpl implements SuperAdminService {
     }
 
     @Override
-    public List<User> getSuperAdmin(int page, int limit, String search, int status) {
+    public List<User> getSuperAdmins(int page, int limit, String search, int status) {
         return null;
     }
 

@@ -15,9 +15,9 @@ public interface SuperAdminService  extends UserDetailsService {
 
     SuperAdminEntity updateSuperAdmin(String superAdminId, SuperAdminEntity superAdminDto);
 
-    void deletegetSuperAdmin(String userId);
+    void deleteSuperAdmin(String superAdminId);
 
-    List<User> getSuperAdmin(int page, int limit, String search, int status);
+    List<User> getSuperAdmins(int page, int limit, String search, int status);
 
 
 

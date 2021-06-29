@@ -10,11 +10,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ResponsableAgence")
-public class ResponsableAgenceResource {
+public class ResponsableAgenceController {
 
     private ResponsableAgentService responsableAgentService;
 
-    public ResponsableAgenceResource(ResponsableAgentService responsableAgentService){
+    public ResponsableAgenceController(ResponsableAgentService responsableAgentService){
         this.responsableAgentService = responsableAgentService;
     }
 
