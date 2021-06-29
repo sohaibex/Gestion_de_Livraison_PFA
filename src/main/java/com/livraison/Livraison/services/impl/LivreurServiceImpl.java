@@ -66,13 +66,13 @@ public class LivreurServiceImpl implements LivreurService {
     }
 
     @Override
-    public LivreurEntity getLivreurById(String superAdminId) {
-        LivreurEntity livreurEntity = livreurRepo.findUserByUserId(superAdminId);
+    public LivreurEntity getLivreurById(String livreurId) {
+        LivreurEntity livreurEntity = livreurRepo.findUserByUserId(livreurId);
 
         //verification
         if(livreurEntity==null)
         {
-            throw  new UsernameNotFoundException(superAdminId);
+            throw  new UsernameNotFoundException(livreurId);
         }
         else
         {
@@ -83,13 +83,34 @@ public class LivreurServiceImpl implements LivreurService {
     }
 
     @Override
-    public LivreurEntity updateLivreur(String livreurId, LivreurEntity livreurDto) {
-        return null;
+    public LivreurEntity updateLivreur(String livreurId, LivreurEntity livreur) {
+        LivreurEntity livreurEntity = livreurRepo.findUserByUserId(livreurId);
+
+        if(livreurEntity == null) throw new UsernameNotFoundException(livreurId);
+
+        livreurEntity.setNom(livreur.getNom());
+        livreurEntity.setPrenom(livreur.getPrenom());
+        livreurEntity.setCin(livreur.getCin());
+        livreurEntity.setTel(livreur.getTel());
+        livreurEntity.setAdresse(livreur.getAdresse());
+        livreurEntity.setEmail(livreur.getEmail());
+
+        LivreurEntity livreurUpdated = livreurRepo.save(livreurEntity);
+
+        LivreurEntity livreurDto = new LivreurEntity();
+
+        BeanUtils.copyProperties(livreurUpdated, livreurDto);
+
+        return livreurDto;
     }
 
     @Override
     public void deleteLivreur(String livreurId) {
+        LivreurEntity livreurEntity = livreurRepo.findUserByUserId(livreurId);
 
+        if(livreurEntity == null) throw new UsernameNotFoundException(livreurId);
+
+        livreurRepo.delete(livreurEntity);
     }
 
     @Override

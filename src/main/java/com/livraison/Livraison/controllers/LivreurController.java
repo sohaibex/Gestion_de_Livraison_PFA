@@ -47,30 +47,32 @@ public class LivreurController {
 
     }
 
-
-/*
     @PutMapping(path="/{id}")
-    public ResponseEntity<UserResponse> updateSuperAdmin(@PathVariable String id,@RequestBody UserRequest userRequest)
+    public ResponseEntity<UserResponse> updateLivreur(@PathVariable String id,@RequestBody UserRequest userRequest)
     {
         //user dto
-        SuperAdminEntity superAdminDto = new SuperAdminEntity();
-        BeanUtils.copyProperties(userRequest,superAdminDto);
+        LivreurEntity livreurDto= new LivreurEntity();
+        BeanUtils.copyProperties(userRequest,livreurDto);
 
-        SuperAdminEntity updateSuperAdmin= superAdminService.updateSuperAdmin(id,superAdminDto);
+        LivreurEntity updateLivreur= livreurService.updateLivreur(id,livreurDto);
 
         UserResponse userResponse = new UserResponse();
 
-        BeanUtils.copyProperties(updateSuperAdmin,userResponse);
+        BeanUtils.copyProperties(updateLivreur,userResponse);
 
         return new ResponseEntity<UserResponse>(userResponse, HttpStatus.ACCEPTED);
     }
 
-
     @DeleteMapping(path="/{id}")
-    public ResponseEntity<Object> deleteSuperAdmin(@PathVariable String id) {
+    public ResponseEntity<Object> deleteLivreur(@PathVariable String id) {
 
-        superAdminService.deletegetSuperAdmin(id);
+        livreurService.deleteLivreur(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+/*
+
+
+
+
 */
 }
