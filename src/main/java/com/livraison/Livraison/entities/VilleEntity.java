@@ -2,12 +2,13 @@ package com.livraison.Livraison.entities;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Entity(name="villes")
-public class VilleEntity {
+public class VilleEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,8 +23,8 @@ public class VilleEntity {
     @OneToMany(mappedBy = "ville")
     private Set<AgenceEntity> agence;
 
-    public VilleEntity() {}
 
+    public VilleEntity() {}
 
 
     public Long getId() {
@@ -41,5 +42,22 @@ public class VilleEntity {
     public void setNomVille(String nomVille) {
         this.nomVille = nomVille;
     }
+
+    public RegionEntity getRegion() {
+        return region;
+    }
+
+    public void setRegion(RegionEntity region) {
+        this.region = region;
+    }
+
+    public Set<AgenceEntity> getAgence() {
+        return agence;
+    }
+
+    public void setAgence(Set<AgenceEntity> agence) {
+        this.agence = agence;
+    }
+
 
 }
