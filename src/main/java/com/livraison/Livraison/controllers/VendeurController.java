@@ -1,46 +1,26 @@
 package com.livraison.Livraison.controllers;
 
+
 import com.livraison.Livraison.entities.SuperAdminEntity;
-import com.livraison.Livraison.models.User;
 import com.livraison.Livraison.requests.UserRequest;
 import com.livraison.Livraison.responses.UserResponse;
 import com.livraison.Livraison.services.SuperAdminService;
-import com.livraison.Livraison.services.impl.SuperAdminServiceImpl;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/SuperAdmin")
-public class SuperAdminController {
+@RequestMapping("/Vendeur")
+public class VendeurController {
     //Injection de dependance
     @Autowired
     SuperAdminService superAdminService;
 
 
-    @GetMapping()
-    public ResponseEntity<List<UserResponse>> getAllSuperAdmins(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "limit", defaultValue = "4") int limit) {
-
-        List<UserResponse> usersResponse = new ArrayList<>();
-
-        List<SuperAdminEntity> users = superAdminService.getAllSuperAdmins(page, limit);
-
-        for (SuperAdminEntity SuperAdminDto : users) {
-
-            ModelMapper modelMapper = new ModelMapper();
-            UserResponse userResponse = modelMapper.map(SuperAdminDto, UserResponse.class);
-
-            usersResponse.add(userResponse);
-        }
-
-        return new ResponseEntity<List<UserResponse>>(usersResponse, HttpStatus.OK);
-    }
 
 
     @GetMapping(path = "/{id}")

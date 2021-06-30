@@ -1,13 +1,20 @@
 package com.livraison.Livraison.services.impl;
 
 import com.livraison.Livraison.entities.SuperAdminEntity;
+import com.livraison.Livraison.models.ResponsableAgence;
 import com.livraison.Livraison.models.User;
 import com.livraison.Livraison.repository.SuperAdminRepo;
+import com.livraison.Livraison.responses.UserResponse;
 import com.livraison.Livraison.services.SuperAdminService;
 import com.livraison.Livraison.sheared.Utils;
 
+import net.bytebuddy.implementation.bind.annotation.Super;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,31 +36,28 @@ public class SuperAdminServiceImpl implements SuperAdminService {
 
     @Override
     public SuperAdminEntity createSuperAdmin(SuperAdminEntity superAdmin) {
-        SuperAdminEntity checkSuperAdmin= superAdminRepo.findSuperAdminByEmail(superAdmin.getEmail());
-        if(checkSuperAdmin != null) throw new RuntimeException("User already exist ");
+        SuperAdminEntity checkSuperAdmin = superAdminRepo.findSuperAdminByEmail(superAdmin.getEmail());
+        if (checkSuperAdmin != null) throw new RuntimeException("User already exist ");
         SuperAdminEntity superAdminEntity = new SuperAdminEntity();
-        BeanUtils.copyProperties(superAdmin,superAdminEntity);
+        BeanUtils.copyProperties(superAdmin, superAdminEntity);
         superAdminEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(superAdmin.getPassword()));
         superAdminEntity.setUserId(util.generateStringId(32));
-        SuperAdminEntity newSuperAdmin= superAdminRepo.save(superAdminEntity);
-        SuperAdminEntity superAdminDto= new SuperAdminEntity();
-        BeanUtils.copyProperties(newSuperAdmin,superAdminDto);
+        SuperAdminEntity newSuperAdmin = superAdminRepo.save(superAdminEntity);
+        SuperAdminEntity superAdminDto = new SuperAdminEntity();
+        BeanUtils.copyProperties(newSuperAdmin, superAdminDto);
         return superAdminDto;
     }
 
     @Override
-    public SuperAdminEntity getSuperAdmin (String email) {
+    public SuperAdminEntity getSuperAdmin(String email) {
         SuperAdminEntity superAdminEntity = superAdminRepo.findSuperAdminByEmail(email);
 
         //verification
-        if(superAdminEntity==null)
-        {
-            throw  new UsernameNotFoundException(email);
-        }
-        else
-        {
+        if (superAdminEntity == null) {
+            throw new UsernameNotFoundException(email);
+        } else {
             SuperAdminEntity superAdminDto = new SuperAdminEntity();
-            BeanUtils.copyProperties(superAdminEntity,superAdminDto);
+            BeanUtils.copyProperties(superAdminEntity, superAdminDto);
             return superAdminDto;
         }
     }
@@ -61,14 +65,11 @@ public class SuperAdminServiceImpl implements SuperAdminService {
     @Override
     public SuperAdminEntity getSuperAdminById(String superAdminId) {
         SuperAdminEntity superAdminEntity = superAdminRepo.findSuperAdminByEmail(superAdminId);
-        if(superAdminEntity==null)
-        {
-            throw  new UsernameNotFoundException(superAdminId);
-        }
-        else
-        {
+        if (superAdminEntity == null) {
+            throw new UsernameNotFoundException(superAdminId);
+        } else {
             SuperAdminEntity superAdminDto = new SuperAdminEntity();
-            BeanUtils.copyProperties(superAdminEntity,superAdminDto);
+            BeanUtils.copyProperties(superAdminEntity, superAdminDto);
             return superAdminDto;
         }
     }
@@ -77,7 +78,7 @@ public class SuperAdminServiceImpl implements SuperAdminService {
     public SuperAdminEntity updateSuperAdmin(String superAdminId, SuperAdminEntity superAdmin) {
         SuperAdminEntity superAdminEntity = superAdminRepo.findUserByUserId(superAdminId);
 
-        if(superAdminEntity == null) throw new UsernameNotFoundException(superAdminId);
+        if (superAdminEntity == null) throw new UsernameNotFoundException(superAdminId);
 
         superAdminEntity.setNom(superAdmin.getNom());
         superAdminEntity.setPrenom(superAdmin.getPrenom());
@@ -95,14 +96,24 @@ public class SuperAdminServiceImpl implements SuperAdminService {
     public void deleteSuperAdmin(String superAdminId) {
         SuperAdminEntity superAdminEntity = superAdminRepo.findUserByUserId(superAdminId);
 
-        if(superAdminEntity == null) throw new UsernameNotFoundException(superAdminId);
+        if (superAdminEntity == null) throw new UsernameNotFoundException(superAdminId);
 
         superAdminRepo.delete(superAdminEntity);
     }
 
+
     @Override
-    public List<User> getSuperAdmins(int page, int limit, String search, int status) {
-        return null;
+    public List<SuperAdminEntity> getAllSuperAdmins(int page, int limit) {
+        List<SuperAdminEntity> superAdminsDto = new ArrayList<>();
+        Pageable pageableRequest = PageRequest.of(page, limit);
+        Page<SuperAdminEntity> superAdminPage = superAdminRepo.findAll(pageableRequest);
+        List<SuperAdminEntity> superAdmins = superAdminPage.getContent();
+        for (SuperAdminEntity superAdminEntity : superAdmins) {
+            SuperAdminEntity user = new SuperAdminEntity();
+            BeanUtils.copyProperties(superAdminEntity, user);
+            superAdminsDto.add(user);
+        }
+        return superAdminsDto;
     }
 
     @Override
@@ -110,7 +121,7 @@ public class SuperAdminServiceImpl implements SuperAdminService {
 
         SuperAdminEntity superAdminEntity = superAdminRepo.findSuperAdminByEmail(email);
         //Verification
-        if(superAdminEntity == null) throw new UsernameNotFoundException(email);
+        if (superAdminEntity == null) throw new UsernameNotFoundException(email);
 
         return new org.springframework.security.core.userdetails.User(superAdminEntity.getEmail(), superAdminEntity.getEncryptedPassword(), new ArrayList<>());
     }
