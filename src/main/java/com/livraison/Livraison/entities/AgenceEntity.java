@@ -2,6 +2,7 @@ package com.livraison.Livraison.entities;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name="agences")
 public class AgenceEntity {
