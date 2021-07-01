@@ -1,11 +1,19 @@
 package com.livraison.Livraison.controllers;
 
+import com.livraison.Livraison.entities.SuperAdminEntity;
 import com.livraison.Livraison.models.ResponsableAgence;
+import com.livraison.Livraison.responses.UserResponse;
 import com.livraison.Livraison.services.impl.ResponsableAgentService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,34 +27,46 @@ public class ResponsableAgenceController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<ResponsableAgence>> gettAllResponsableAgent()
-    {
-        List<ResponsableAgence> responsableAgences = responsableAgentService.gettAllResponsableAgent();
-        return new ResponseEntity<>(responsableAgences, HttpStatus.OK);
-    }
+    public ResponseEntity<List<UserResponse>> gettAllResponsableAgent(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "limit", defaultValue = "4") int limit) {
 
-    @GetMapping("/getRespeAgent/{id}")
+        List<UserResponse> usersResponse = new ArrayList<>();
+
+        List<ResponsableAgence> users = responsableAgentService.gettAllResponsableAgent(page, limit);
+
+        for (ResponsableAgence responsableAgenceDto : users) {
+
+            ModelMapper modelMapper = new ModelMapper();
+            UserResponse userResponse = modelMapper.map(responsableAgenceDto, UserResponse.class);
+
+            usersResponse.add(userResponse);
+        }
+
+        return new ResponseEntity<List<UserResponse>>(usersResponse, HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
     public ResponseEntity<List<ResponsableAgence>> getResponsablAgentById(@PathVariable("id") Long id)
     {
         ResponsableAgence responsableAgence = responsableAgentService.getResponsablAgentById(id);
         return new ResponseEntity(responsableAgence, HttpStatus.OK);
     }
 
-    @PostMapping("/AddRespAgent")
-    public ResponseEntity<ResponsableAgence> addResponsableAgent(@RequestBody ResponsableAgence responsableAgence)
+    @PostMapping
+    public ResponseEntity<UserResponse> addResponsableAgent(@RequestBody ResponsableAgence responsableAgence)
     {
         ResponsableAgence newResponsableAgent = responsableAgentService.addResponsableAgence(responsableAgence);
-        return new ResponseEntity<>(newResponsableAgent, HttpStatus.CREATED);
+        UserResponse userResponse = new UserResponse();
+        BeanUtils.copyProperties(newResponsableAgent, userResponse);
+        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.CREATED);
     }
 
-    @PutMapping("/updateRespAgent")
+    @PutMapping()
     public ResponseEntity<ResponsableAgence> updateResponsableAgent(@RequestBody ResponsableAgence responsableAgence)
     {
         ResponsableAgence updateResponsableAgent = responsableAgentService.updateResponsableAgence(responsableAgence);
         return new ResponseEntity<>(updateResponsableAgent, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?>deleteResponsableAgent(@PathVariable("id") Long id)
     {
         responsableAgentService.deleteResponsableAgent(id);
