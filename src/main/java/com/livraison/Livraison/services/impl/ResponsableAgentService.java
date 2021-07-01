@@ -1,6 +1,6 @@
 package com.livraison.Livraison.services.impl;
 
-import com.livraison.Livraison.models.ResponsableAgence;
+import com.livraison.Livraison.entities.ResponsableAgence;
 import com.livraison.Livraison.repository.ResponsableAgentRepo;
 import com.livraison.Livraison.sheared.Utils;
 import org.springframework.beans.BeanUtils;
@@ -27,26 +27,25 @@ public class ResponsableAgentService {
     Utils util;
 
     @Autowired
-    public ResponsableAgentService(ResponsableAgentRepo responsableAgentRepo){
+    public ResponsableAgentService(ResponsableAgentRepo responsableAgentRepo) {
         this.responsableAgentRepo = responsableAgentRepo;
     }
 
-    public ResponsableAgence addResponsableAgence(ResponsableAgence responsableAgence)
-    {
+    public ResponsableAgence addResponsableAgence(ResponsableAgence responsableAgence) {
         responsableAgence.setUserId(UUID.randomUUID().toString());
         responsableAgence.setEncryptedPassword(bCryptPasswordEncoder.encode(responsableAgence.getPassword()));
         return responsableAgentRepo.save(responsableAgence);
     }
 
-    public ResponsableAgence updateResponsableAgence(ResponsableAgence responsableAgence)
-    {
+    public ResponsableAgence updateResponsableAgence(ResponsableAgence responsableAgence) {
         return responsableAgentRepo.save(responsableAgence);
     }
+
     public List<ResponsableAgence> gettAllResponsableAgent(int page, int limit) {
         List<ResponsableAgence> responsableAgencesDto = new ArrayList<>();
         Pageable pageableRequest = PageRequest.of(page, limit);
         Page<ResponsableAgence> responsableAgencePage = responsableAgentRepo.findAll(pageableRequest);
-        List<ResponsableAgence>responsableAgences = responsableAgencePage.getContent();
+        List<ResponsableAgence> responsableAgences = responsableAgencePage.getContent();
         for (ResponsableAgence responsableAgenceEntity : responsableAgences) {
             ResponsableAgence user = new ResponsableAgence();
             BeanUtils.copyProperties(responsableAgenceEntity, user);
@@ -55,13 +54,11 @@ public class ResponsableAgentService {
         return responsableAgencesDto;
     }
 
-    public ResponsableAgence getResponsablAgentById(long id)
-    {
-        return responsableAgentRepo.getResponsableAgenceById(id).orElseThrow(()-> new UsernameNotFoundException("User "+id+" was nt found"));
+    public ResponsableAgence getResponsablAgentById(long id) {
+        return responsableAgentRepo.getResponsableAgenceById(id).orElseThrow(() -> new UsernameNotFoundException("User " + id + " was nt found"));
     }
 
-    public void deleteResponsableAgent(long id)
-    {
+    public void deleteResponsableAgent(long id) {
         responsableAgentRepo.deleteResponsableAgenceById(id);
     }
 }
