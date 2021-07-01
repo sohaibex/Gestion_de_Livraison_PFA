@@ -1,16 +1,20 @@
 package com.livraison.Livraison.controllers;
 
 
-import com.livraison.Livraison.entities.SuperAdminEntity;
+import com.livraison.Livraison.entities.VendeurEntity;
+import com.livraison.Livraison.entities.VendeurEntity;
 import com.livraison.Livraison.requests.UserRequest;
 import com.livraison.Livraison.responses.UserResponse;
 import com.livraison.Livraison.services.SuperAdminService;
+import com.livraison.Livraison.services.VendeurService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,57 +22,78 @@ import java.util.List;
 public class VendeurController {
     //Injection de dependance
     @Autowired
-    SuperAdminService superAdminService;
-
-
-
-
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<UserResponse> getSuperAdminById(@PathVariable String id) {
-        SuperAdminEntity superAdminDto = superAdminService.getSuperAdminById(id);
-        UserResponse userResponse = new UserResponse();
-        BeanUtils.copyProperties(superAdminDto, userResponse);
-        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
-    }
-
+    VendeurService vendeurService;
 
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<UserResponse> createVendeur(@RequestBody UserRequest userRequest) {
         //user dto
-        SuperAdminEntity superAdmin = new SuperAdminEntity();
-        BeanUtils.copyProperties(userRequest, superAdmin);
+        VendeurEntity vendeur = new VendeurEntity();
+        BeanUtils.copyProperties(userRequest, vendeur);
 
-        SuperAdminEntity createSuperAdmin = superAdminService.createSuperAdmin(superAdmin);
+        VendeurEntity createVendeur = vendeurService.createVendeur(vendeur);
 
         UserResponse userResponse = new UserResponse();
 
-        BeanUtils.copyProperties(createSuperAdmin, userResponse);
+        BeanUtils.copyProperties(createVendeur, userResponse);
 
         return new ResponseEntity<UserResponse>(userResponse, HttpStatus.CREATED);
 
     }
 
 
-    @PutMapping(path = "/{id}")
-    public ResponseEntity<UserResponse> updateSuperAdmin(@PathVariable String id, @RequestBody UserRequest userRequest) {
-        //user dto
-        SuperAdminEntity superAdminDto = new SuperAdminEntity();
-        BeanUtils.copyProperties(userRequest, superAdminDto);
+    @GetMapping()
+    public ResponseEntity<List<UserResponse>> getAllVendeurs(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "limit", defaultValue = "4") int limit) {
 
-        SuperAdminEntity updateSuperAdmin = superAdminService.updateSuperAdmin(id, superAdminDto);
+        List<UserResponse> usersResponse = new ArrayList<>();
 
-        UserResponse userResponse = new UserResponse();
+        List<VendeurEntity> users = vendeurService.getAllVendeurs(page, limit);
 
-        BeanUtils.copyProperties(updateSuperAdmin, userResponse);
+        for (VendeurEntity vendeurDto : users) {
 
-        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.ACCEPTED);
+            ModelMapper modelMapper = new ModelMapper();
+            UserResponse userResponse = modelMapper.map(vendeurDto, UserResponse.class);
+
+            usersResponse.add(userResponse);
+        }
+
+        return new ResponseEntity<List<UserResponse>>(usersResponse, HttpStatus.OK);
     }
+
+
+
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<UserResponse> getVendeurById(@PathVariable String id) {
+        VendeurEntity vendeurDto = vendeurService.getVendeurById(id);
+        UserResponse userResponse = new UserResponse();
+        BeanUtils.copyProperties(vendeurDto, userResponse);
+        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
+    }
+
+
+
+
+
+   @PutMapping(path = "/{id}")
+    public ResponseEntity<UserResponse> updateSuperAdmin(@PathVariable String id, @RequestBody UserRequest userRequest) {
+       //user dto
+       VendeurEntity vendeurDto = new VendeurEntity();
+       BeanUtils.copyProperties(userRequest, vendeurDto);
+
+       VendeurEntity updateVendeur= vendeurService.updateVendeur(id, vendeurDto);
+
+       UserResponse userResponse = new UserResponse();
+
+       BeanUtils.copyProperties(updateVendeur, userResponse);
+
+       return new ResponseEntity<UserResponse>(userResponse, HttpStatus.ACCEPTED);
+   }
 
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Object> deleteSuperAdmin(@PathVariable String id) {
 
-        superAdminService.deleteSuperAdmin(id);
+        vendeurService.deleteVendeur(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
