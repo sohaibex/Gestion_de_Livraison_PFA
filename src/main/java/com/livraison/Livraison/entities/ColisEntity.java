@@ -1,6 +1,7 @@
 package com.livraison.Livraison.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name="colis")
 public class ColisEntity {
@@ -45,4 +46,10 @@ public class ColisEntity {
 
     @ManyToOne
     private VendeurEntity vendeur;
+
+    @ManyToMany
+    Set<AgenceEntity> agences;
+
+    public ColisEntity() {
+    }
 }

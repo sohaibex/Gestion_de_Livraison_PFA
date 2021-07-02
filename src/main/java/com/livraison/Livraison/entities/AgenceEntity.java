@@ -18,6 +18,9 @@ public class AgenceEntity {
     @JoinColumn(name="id_ville", nullable=false)
     private VilleEntity ville;
 
+    @ManyToMany
+    Set<ColisEntity> colis;
+
 
 
     public AgenceEntity(Long id, String nomAgence, VilleEntity ville) {
