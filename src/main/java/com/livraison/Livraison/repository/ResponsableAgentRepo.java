@@ -1,8 +1,6 @@
 package com.livraison.Livraison.repository;
 
-import com.livraison.Livraison.entities.SuperAdminEntity;
-import com.livraison.Livraison.models.ResponsableAgence;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.livraison.Livraison.entities.ResponsableAgence;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;

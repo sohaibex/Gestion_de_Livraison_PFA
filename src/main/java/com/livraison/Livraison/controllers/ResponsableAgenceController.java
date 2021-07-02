@@ -1,14 +1,10 @@
 package com.livraison.Livraison.controllers;
 
-import com.livraison.Livraison.entities.SuperAdminEntity;
-import com.livraison.Livraison.models.ResponsableAgence;
+import com.livraison.Livraison.entities.ResponsableAgence;
 import com.livraison.Livraison.responses.UserResponse;
 import com.livraison.Livraison.services.impl.ResponsableAgentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
