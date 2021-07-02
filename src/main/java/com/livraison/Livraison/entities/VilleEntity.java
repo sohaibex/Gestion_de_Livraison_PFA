@@ -16,12 +16,18 @@ public class VilleEntity{
     @Column(nullable = false, name = "nom_Ville", length = 225)
     private String nomVille;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable
+    private Set<UserEntity> users;
+
     @ManyToOne
     @JoinColumn(name="id_region", nullable=false)
     private RegionEntity region;
 
     @OneToMany(mappedBy = "ville")
     private Set<AgenceEntity> agence;
+
+
 
 
     public VilleEntity() {}

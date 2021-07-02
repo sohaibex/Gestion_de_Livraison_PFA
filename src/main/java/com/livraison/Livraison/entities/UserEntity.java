@@ -2,6 +2,7 @@ package com.livraison.Livraison.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 
 @Entity(name="users")
@@ -24,6 +25,9 @@ public class UserEntity implements Serializable {
     private String encryptedPassword;
     private String role;
     private String password;
+
+    @ManyToMany(mappedBy = "users")
+    private Set<VilleEntity> ville;
 
     public String getPassword() {
         return password;

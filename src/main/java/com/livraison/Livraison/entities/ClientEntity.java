@@ -26,9 +26,7 @@ public class ClientEntity {
     private VilleEntity id_ville;
 
 
-
     public ClientEntity(){}
-
 
 
     public Long getId() {

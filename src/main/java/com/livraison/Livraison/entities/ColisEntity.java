@@ -38,6 +38,10 @@ public class ColisEntity {
     private double prixT;
 
     @OneToOne
+    @JoinColumn(name = "statue", nullable = false)
+    private StatueEntity statue;
+
+    @OneToOne
     @JoinColumn(name = "id_client", nullable = false)
     private ClientEntity id_client;
 
