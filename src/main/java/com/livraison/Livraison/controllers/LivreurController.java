@@ -70,10 +70,5 @@ public class LivreurController {
         livreurService.deleteLivreur(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-/*
 
-
-
-
-*/
 }
