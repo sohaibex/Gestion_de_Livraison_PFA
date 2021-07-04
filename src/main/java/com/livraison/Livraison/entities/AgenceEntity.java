@@ -1,6 +1,8 @@
 package com.livraison.Livraison.entities;
 
 
+import org.stringtemplate.v4.ST;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,37 +17,7 @@ public class AgenceEntity {
     @Column(nullable = false)
     private String agenceId;
 
-    public String getGet() {
-        return get;
-    }
 
-    public void setGet(String get) {
-        this.get = get;
-    }
-
-    public String getAgenceId() {
-        return agenceId;
-    }
-
-    public void setAgenceId(String agenceId) {
-        this.agenceId = agenceId;
-    }
-
-    public VilleEntity getVille() {
-        return ville;
-    }
-
-    public void setVille(VilleEntity ville) {
-        this.ville = ville;
-    }
-
-    public Set<ColisEntity> getColis() {
-        return colis;
-    }
-
-    public void setColis(Set<ColisEntity> colis) {
-        this.colis = colis;
-    }
 
     @Column(nullable = false, name = "nom_Agence", length = 225)
     private String nomAgence;
@@ -84,6 +56,37 @@ public class AgenceEntity {
 
     public void setNomAgence(String nomAgence) {
         this.nomAgence = nomAgence;
+    }
+    public String getGet() {
+        return get;
+    }
+
+    public void setGet(String get) {
+        this.get = get;
+    }
+
+    public String getAgenceId() {
+        return agenceId;
+    }
+
+    public void setAgenceId(String agenceId) {
+        this.agenceId = agenceId;
+    }
+
+    public VilleEntity getVille() {
+        return ville;
+    }
+
+    public void setVille(VilleEntity ville) {
+        this.ville = ville;
+    }
+
+    public Set<ColisEntity> getColis() {
+        return colis;
+    }
+
+    public void setColis(Set<ColisEntity> colis) {
+        this.colis = colis;
     }
 
 }

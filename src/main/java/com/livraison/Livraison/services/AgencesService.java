@@ -11,6 +11,8 @@ public interface AgencesService {
 
     AgenceEntity getAgenceById(String agenceId);
 
+    AgenceEntity getAgence(String agenceId);
+
     AgenceEntity updateAgence(String agenceId, AgenceEntity agenceDto);
 
     void deleteAgence(String agenceId);
