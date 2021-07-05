@@ -33,7 +33,7 @@ public class AgencesServiceimpl implements AgencesService {
         if(checkAgence != null) throw new RuntimeException("Agence Alredy exist ");
         AgenceEntity agenceDto = new AgenceEntity();
         BeanUtils.copyProperties(agence, agenceDto);
-        agenceDto.setAgenceId(util.generateStringId(32));
+
 
         AgenceEntity newAgence = agenceRepo.save(agenceDto);
 

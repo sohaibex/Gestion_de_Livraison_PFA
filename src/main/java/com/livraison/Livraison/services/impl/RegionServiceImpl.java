@@ -23,7 +23,7 @@ public class RegionServiceImpl implements RegionService {
 
     @Override
     public RegionEntity getRegionById(String  regionId) {
-        RegionEntity regionEntity = regionRepo.findRegionEntityByRegionId(regionId);
+        RegionEntity regionEntity = regionRepo.findRegionEntityById(regionId);
         if (regionEntity == null) {
             throw new UsernameNotFoundException(regionId);
         } else {

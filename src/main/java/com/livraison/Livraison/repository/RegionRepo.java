@@ -7,6 +7,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.List;
 
 public interface RegionRepo   extends PagingAndSortingRepository<RegionEntity, Long> {
-    RegionEntity findRegionEntityByRegionId(String regionId);
+    RegionEntity findRegionEntityById(String regionId);
     List<RegionEntity> findAll();
 }

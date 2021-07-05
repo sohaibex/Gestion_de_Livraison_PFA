@@ -21,13 +21,6 @@ public class RegionController {
     @Autowired
     RegionService regionService;
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<RegionResponse> getRegionById(@PathVariable String regionId) {
-        RegionEntity superAdminDto = regionService.getRegionById(regionId);
-        RegionResponse userResponse = new RegionResponse();
-        BeanUtils.copyProperties(superAdminDto, userResponse);
-        return new ResponseEntity<RegionResponse>(userResponse, HttpStatus.OK);
-    }
 
 
 

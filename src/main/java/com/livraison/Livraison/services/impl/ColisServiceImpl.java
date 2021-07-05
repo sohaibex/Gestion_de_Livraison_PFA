@@ -22,12 +22,12 @@ public class ColisServiceImpl implements ColisService {
     @Override
     public ColisEntity createColis(ColisEntity colis) {
 
-        ColisEntity checkColis = colisRepo.findColisbyCode(colis.getCodeColis());
+        ColisEntity checkColis = colisRepo.findColisEntityById(colis.getCodeColis());
         if (checkColis != null) throw new RuntimeException("Code already exist ");
         ColisEntity colisDto = new ColisEntity();
         BeanUtils.copyProperties(colis, colisDto);
 
-        colisDto.setId(util.generateStringId(32));
+        colisDto.setCodeColis(util.generateStringId(32));
         //la persistance
         ColisEntity newColis = colisRepo.save(colisDto);
 
@@ -39,7 +39,7 @@ public class ColisServiceImpl implements ColisService {
 
     @Override
     public ColisEntity getColis(String codeColis) {
-        ColisEntity colisEntity = colisRepo.findColisbyCode(codeColis);
+        ColisEntity colisEntity = colisRepo.findColisEntityById(codeColis);
         if(colisEntity==null)
         {
             throw new RuntimeException("Code dos not exist ");
@@ -69,7 +69,7 @@ public class ColisServiceImpl implements ColisService {
 
     @Override
     public ColisEntity updateColis(String codeColis, ColisEntity colis) {
-        ColisEntity colisEntity = colisRepo.findColisbyCode(codeColis);
+        ColisEntity colisEntity = colisRepo.findColisEntityById(codeColis);
 
         if(colisEntity==null) throw new RuntimeException("Code dos not exist ");
 
@@ -96,7 +96,7 @@ public class ColisServiceImpl implements ColisService {
 
     @Override
     public void deleteColis(String codeColis) {
-        ColisEntity colisEntity = colisRepo.findColisbyCode(codeColis);
+        ColisEntity colisEntity = colisRepo.findColisEntityById(codeColis);
 
         if(colisEntity==null) throw new RuntimeException("Code dos not exist ");
 

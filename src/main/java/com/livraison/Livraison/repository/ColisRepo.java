@@ -5,6 +5,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface ColisRepo extends PagingAndSortingRepository<ColisEntity, Long> {
 
-    ColisEntity findColisbyCode(String codeColis);
+    ColisEntity findColisEntityById(String codeColis);
     ColisEntity findColisById(Long id);
 }
