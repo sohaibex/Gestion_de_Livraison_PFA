@@ -16,14 +16,18 @@ public class RegionEntity {
     @OneToMany(mappedBy = "region")
     private Set<VilleEntity> ville;
 
+    @Column(nullable = false)
+    private String RegionId;
+
+    public String getRegionId() {
+        return RegionId;
+    }
+
+    public void setRegionId(String regionId) {
+        RegionId = regionId;
+    }
 
     public RegionEntity() {}
-
-    public RegionEntity(Long id, String nomRegion, Set<VilleEntity> ville) {
-        this.id = id;
-        this.nomRegion = nomRegion;
-        this.ville = ville;
-    }
 
 
 

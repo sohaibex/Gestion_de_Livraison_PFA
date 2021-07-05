@@ -1,6 +1,5 @@
 package com.livraison.Livraison.entities;
 
-
 import javax.persistence.*;
 import java.util.Set;
 
