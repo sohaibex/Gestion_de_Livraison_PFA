@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# This will ignore log files (the double-star means to apply it recursively, so it will match every subdirectory)
+**/*.log
